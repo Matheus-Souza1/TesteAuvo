@@ -1,0 +1,40 @@
+﻿
+@model IEnumerable<TesteAuvo.Data.PrevisaoClima>
+
+<div>
+
+    <div class="cards-container">
+
+        <div class="k-card k-card-vertical k-text-center">
+            <div class="card-header">
+                <div style="font-family: Segoe UI Emoji; font-size: 3rem;">&#9728;  <h5 class="k-card-title"> Cidade mais quente hoje</h5></div>
+            </div>
+            @foreach (var item in Model)
+            {
+                <div class="k-card-body">
+                    <div class="k-card-subtitle" style="font-size: 2em;">
+                        <h6> <b>@Html.DisplayFor(modelItem => item.Cidade.Nome)-@Html.DisplayFor(modelItem => item.Cidade.Estado.UF)</b></h6>
+                        <h6> @decimal.Parse(Html.DisplayFor(modelItem => item.TemperaturaMaxima).ToHtmlString().Substring(0, 3))&deg;</h6>
+                    </div>
+                </div>
+            }
+        </div>
+        <style>
+
+            .cards-container {
+                display: flex;
+                margin: 0px;
+                padding: 0px;
+            }
+
+            .k-card {
+                text-align: center;
+                margin: 5%;
+                width: 350px;
+                box-shadow: 0 12px 8px 0 rgba(0,0,0,0.2);
+                border-radius: 20px;
+                transition: 0.3s;
+            }
+        </style>
+    </div>
+</div>

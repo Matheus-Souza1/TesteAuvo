@@ -1,0 +1,44 @@
+﻿
+@model IEnumerable<TesteAuvo.Data.PrevisaoClima>
+
+<div style="text-align:center; font-family:'Segoe UI Emoji'; background-color:#343a40; color:aliceblue; border-radius:20px">
+    <h1 style="font-size: 40px">Clima Tempo Simples</h1>
+</div>
+
+<div class="container">
+    <div class="row" style="margin-top: 50px; margin-bottom:50px;">
+        <div class="col-md-3 col-sm-12" style="float:right">
+            @{Html.RenderAction("PrevisaoClimaTempMinima", "PrevisaoClima");}
+        </div>
+        <div class="col-md-3 col-sm-12" style="float: right">
+            @{Html.RenderAction("PrevisaoClimaTempMaxima", "PrevisaoClima");}
+        </div>
+    </div>
+</div>
+
+<div style="text-align:center; font-family:'Segoe UI Emoji'; background-color:#343a40; color:aliceblue; border-radius:20px">
+    <h1 style="font-size: 40px">Clima para os proximos sete dias</h1>
+</div>
+
+<div style="margin-bottom: 40px; margin-top: 40px;">
+    <label><b>Cidades</b></label>
+    <div class="form-group">
+        @using (Ajax.BeginForm("Index", "PrevisaoClima", new AjaxOptions { HttpMethod = "Get", InsertionMode = InsertionMode.Replace, UpdateTargetId = "divResultado" }))
+        {
+
+        <div class="input-group mb-3">
+            @Html.DropDownList("CidadeId", null, "Selecione", htmlAttributes: new { style = "border-radius:20px;", @class = "form-control" })
+            <div class="input-group-append" style="padding: 5px">
+                <input type="submit" value="pesquisar" style=" background-color: #343a40; color:aliceblue; border-radius:20px;" />
+            </div>
+        </div>
+        }
+    </div>
+</div>
+<div>
+    @Html.Partial("_ResultadoPrevisaoSemanal", Model)
+</div>
+
+@section Scripts{
+    @Scripts.Render("~/bundles/jqueryval")
+}
